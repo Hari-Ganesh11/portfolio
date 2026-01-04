@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { NavbarThemeToggle } from "./atoms/toggletheme";
 import { Menu } from "lucide-react";
 

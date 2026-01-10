@@ -256,7 +256,7 @@ const Skills: React.FC = () => {
       <div className="container mx-auto px-4">
         <Tabs defaultValue="skills" className="flex flex-col items-center">
           {/* Tabs Header */}
-          <TabsList className="mx-auto w-fit ">
+          <TabsList className="mx-auto w-fit gap-8 ">
             <TabsTrigger value="skills" className="px-2 text-2xl cursor-pointer">
               Skills
             </TabsTrigger>

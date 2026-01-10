@@ -2,8 +2,9 @@
 
 import * as React from "react"
 import * as TabsPrimitive from "@radix-ui/react-tabs"
-
 import { cn } from "@/lib/utils"
+
+/* ---------------- Tabs Root ---------------- */
 
 function Tabs({
   className,
@@ -18,52 +19,65 @@ function Tabs({
   )
 }
 
-function TabsList({
-    className,
-    ...props
-  }: React.ComponentProps<typeof TabsPrimitive.List>) {
-    return (
-      <TabsPrimitive.List
-        data-slot="tabs-list"
-        className={cn(
-          `
-          relative inline-flex w-fit items-center gap-8
-          border-b border-border
-          `,
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-  
+/* ---------------- Tabs List ---------------- */
 
-  function TabsTrigger({
-    className,
-    ...props
-  }: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
-    return (
-      <TabsPrimitive.Trigger
-        data-slot="tabs-trigger"
-        className={cn(
+function TabsList({
+  className,
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.List>) {
+  return (
+    <TabsPrimitive.List
+      data-slot="tabs-list"
+      className={cn(
+        `
+        relative inline-flex w-fit items-center
+        border-b border-border
+        `,
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+/* ---------------- Tabs Trigger ---------------- */
+
+type TabsTriggerProps =
+  React.ComponentProps<typeof TabsPrimitive.Trigger> & {
+    variant?: "underline" | "card"
+  }
+
+function TabsTrigger({
+  className,
+  variant = "underline",
+  ...props
+}: TabsTriggerProps) {
+  return (
+    <TabsPrimitive.Trigger
+      data-slot="tabs-trigger"
+      className={cn(
+        `
+        group relative
+        text-sm font-medium
+        transition-colors duration-300
+        focus-visible:outline-none
+        mb-2
+        `,
+        variant === "underline" &&
           `
-          group relative px-1 pb-3
-          text-sm font-medium
+          px-1 pb-3
           text-muted-foreground
-          transition-colors duration-300
-  
           hover:text-foreground
-          focus-visible:outline-none
-  
           data-[state=active]:text-foreground
           `,
-          className
-        )}
-        {...props}
-      >
-        {props.children}
-  
-        {/* Underline */}
+        className
+      )}
+      {...props}
+    >
+      {props.children}
+
+      {/* ✅ Underline ONLY for underline variant */}
+      {variant === "underline" && (
         <span
           className="
             pointer-events-none
@@ -73,11 +87,12 @@ function TabsList({
             group-data-[state=active]:scale-x-100
           "
         />
-      </TabsPrimitive.Trigger>
-    )
-  }
-  
-  
+      )}
+    </TabsPrimitive.Trigger>
+  )
+}
+
+/* ---------------- Tabs Content ---------------- */
 
 function TabsContent({
   className,
@@ -91,5 +106,7 @@ function TabsContent({
     />
   )
 }
+
+/* ---------------- Exports ---------------- */
 
 export { Tabs, TabsList, TabsTrigger, TabsContent }

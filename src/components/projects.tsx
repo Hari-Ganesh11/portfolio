@@ -4,6 +4,7 @@ import * as SiIcons from "react-icons/si";
 import * as VscIcons from "react-icons/vsc";
 import * as fa from "react-icons/fa";
 import type { IconType } from "react-icons";
+import { useTheme } from "../theme/themeContext";
 
 // -------------------- Types --------------------
 type Project = {
@@ -58,6 +59,7 @@ const TECH_META_MAP: Record<string, TechMeta> = {
   Zustand: {
     icon: SiIcons.SiReact,
     color: "#443E38",
+    darkColor: "#FFFFFF",
   },
   "Tailwind CSS": {
     icon: SiIcons.SiTailwindcss,
@@ -159,17 +161,17 @@ const projects: Project[] = [
 
 // -------------------- Component --------------------
 const Projects: React.FC = () => {
+  const { theme } = useTheme();
+
   const isDark =
-    typeof window !== "undefined" &&
-    document.documentElement.classList.contains("dark");
+    theme === "dark" ||
+    (theme === "system" &&
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   return (
     <section id="projects" className="py-16">
       <div className="container mx-auto px-4">
-        {/* <h2 className="text-2xl font-bold mb-8">
-          Selected Projects I’ve Built
-        </h2> */}
-
         <Tabs orientation="vertical" defaultValue={projects[0].id}>
           <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8">
             {/* LEFT: Project selector */}
@@ -181,8 +183,8 @@ const Projects: React.FC = () => {
                   variant="card"
                   className="
                     relative flex items-center gap-3 p-4 rounded-xl
-                    border border-gray-200 dark:border-gray-700
-                    bg-white dark:bg-gray-800
+                    border border-gray-200 dark:border-gray-900
+                    bg-white dark:bg-gray-900
                     shadow-sm transition-all
                     hover:bg-gray-100 dark:hover:bg-gray-700
                     data-[state=active]:bg-blue-500
@@ -209,8 +211,10 @@ const Projects: React.FC = () => {
                   )}
 
                   <div className="flex flex-col text-left">
-                    <span className=" font-medium md:font-semibold">{project.title}</span>
-                    <span className="hidden md:block text-sm text-muted-foreground">
+                    <span className="font-medium md:font-semibold">
+                      {project.title}
+                    </span>
+                    <span className="hidden md:block text-sm text-muted-foreground sm:text-[10px] md:text-sm">
                       {project.subtitle}
                     </span>
                   </div>
@@ -225,7 +229,7 @@ const Projects: React.FC = () => {
                   key={project.id}
                   value={project.id}
                   className="
-                    bg-white dark:bg-gray-800
+                    bg-white dark:bg-black
                     p-8 rounded-xl shadow-md
                     border border-gray-200 dark:border-gray-700
                     space-y-6
@@ -234,9 +238,7 @@ const Projects: React.FC = () => {
                   {/* Header */}
                   <div>
                     <h3 className="text-xl font-semibold">{project.title}</h3>
-                    <p className="text-muted-foreground">
-                      {project.subtitle}
-                    </p>
+                    <p className="text-muted-foreground">{project.subtitle}</p>
                     <p className="text-sm text-gray-400 mt-1">
                       {project.duration}
                     </p>
@@ -261,9 +263,7 @@ const Projects: React.FC = () => {
 
                   {/* Highlights */}
                   <div>
-                    <h4 className="font-semibold mb-2">
-                      Key Contributions
-                    </h4>
+                    <h4 className="font-semibold mb-2">Key Contributions</h4>
                     <ul className="list-disc list-inside space-y-1">
                       {project.highlights.map((h, i) => (
                         <li key={i}>{h}</li>

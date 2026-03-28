@@ -16,6 +16,8 @@
   --color-ring: var(--ring);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
 }
 
 :root {
@@ -30,6 +32,8 @@
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
 }
 
 .dark {
@@ -42,6 +46,8 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
 }
 
 @layer base {
@@ -51,4 +57,33 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes laser-spin {
+  0%   { --angle: 0deg; }
+  100% { --angle: 360deg; }
+}
+
+.laser-border {
+  position: relative;
+  border-radius: 14px; /* slightly more than card's rounded-xl (12px) */
+  padding: 2px;
+  background: conic-gradient(
+    from var(--angle),
+    transparent 0%,
+    transparent 70%,
+    #a78bfa 80%,
+    #818cf8 85%,
+    #ffffff 88%,
+    #818cf8 91%,
+    #a78bfa 94%,
+    transparent 100%
+  );
+  animation: laser-spin 3s linear infinite;
 }

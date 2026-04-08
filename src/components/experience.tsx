@@ -127,7 +127,7 @@ const Experience = () => {
   return (
     <section
       id="experience"
-      className="py-12 bg-background text-foreground transition-colors duration-300"
+      className="py-12 scroll-mt-20 bg-background text-foreground transition-colors duration-300"
     >
       <div className="container mx-auto px-4 ">
         {/* <h2 className="text-2xl font-bold tracking-tight mb-8">Experience</h2> */}

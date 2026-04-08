@@ -170,7 +170,7 @@ const Projects: React.FC = () => {
       window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   return (
-    <section id="projects" className="py-16">
+    <section id="projects" className="min-h-screen scroll-mt-60 py-16">
       <div className="container mx-auto px-4">
         <Tabs orientation="vertical" defaultValue={projects[0].id}>
           <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8">

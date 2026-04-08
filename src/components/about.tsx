@@ -65,7 +65,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-12 bg-background text-foreground transition-colors duration-300">
+    <section id="about" className="min-h-screen scroll-mt-40 py-12 bg-background text-foreground transition-colors duration-300">
       <div className="container mx-auto px-4">
         {/* Section Heading
         <div className="text-center mb-12">

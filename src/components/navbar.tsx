@@ -11,7 +11,7 @@ const Navbar = () => {
     <section id="Navbar" className="Navbar relative w-full py-4 h-16">
       <div className="flex  flex-wrap container mx-auto items-center justify-between px-4 md:px-4 lg:px-0">
         {/* this logo section */}
-        <div>the logo comes here</div>
+        <div className="text-5xl font-extrabold">HG</div>
         {MobileMenuOpen && (
           <div
             onClick={() => setMobileMenuOpen(false)}
